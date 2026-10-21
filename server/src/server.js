@@ -62,6 +62,17 @@ app.use(cookieParser(config.cookieSecret));
 // Serve local upload assets statically
 app.use('/uploads', express.static(path.resolve(__dirname, '../uploads')));
 
+// Database connection assurance for serverless environments
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error('[Database Middleware Error]:', err.message);
+    return res.status(500).json({ success: false, message: 'Database connection failed' });
+  }
+});
+
 // General API Rate Limiting
 app.use('/api', generalLimiter);
 
@@ -117,4 +128,6 @@ if (require.main === module) {
   startServer();
 }
 
-module.exports = { app, startServer };
+app.app = app;
+app.startServer = startServer;
+module.exports = app;
