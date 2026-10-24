@@ -66,6 +66,19 @@ app.use('/uploads', express.static(path.resolve(__dirname, '../uploads')));
 const clientDistPath = path.resolve(__dirname, '../../client/dist');
 app.use(express.static(clientDistPath));
 
+// Health check endpoint (exempt from rate limits and db wait for instant cloud ping)
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    service: 'Jashvi Boutique REST API',
+    mode: config.env,
+    storageAdapter: config.storage.mode,
+    paymentAdapter: config.payment.mode,
+    isMockPayments: !config.payment.isRazorpayActive,
+  });
+});
+
 // Database connection assurance for serverless environments
 app.use(async (req, res, next) => {
   try {
@@ -79,19 +92,6 @@ app.use(async (req, res, next) => {
 
 // General API Rate Limiting
 app.use('/api', generalLimiter);
-
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'healthy',
-    timestamp: new Date().toISOString(),
-    service: 'Jashvi Boutique REST API',
-    mode: config.env,
-    storageAdapter: config.storage.mode,
-    paymentAdapter: config.payment.mode,
-    isMockPayments: !config.payment.isRazorpayActive,
-  });
-});
 
 // API Routes
 app.use('/api/auth', authRoutes);
@@ -130,8 +130,8 @@ async function startServer() {
     await connectDB();
     logEnvironmentSummary();
 
-    const server = app.listen(config.port, async () => {
-      console.log(`[Jashvi Boutique Server] Running smoothly on http://localhost:${config.port}`);
+    const server = app.listen(config.port, '0.0.0.0', async () => {
+      console.log(`[Jashvi Boutique Server] Running smoothly on port ${config.port} (0.0.0.0)`);
 
       // Auto-seed initial catalog if database is fresh (e.g. initial Render deployment)
       try {
