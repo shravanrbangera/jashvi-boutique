@@ -351,11 +351,17 @@ async function seedDatabase() {
     console.log('Customer Pass:    CustomerPass@2026');
     console.log('----------------------------------------------------');
 
-    process.exit(0);
+    return { success: true };
   } catch (error) {
     console.error('[Seed Error] Failed to seed database:', error);
-    process.exit(1);
+    throw error;
   }
 }
 
-seedDatabase();
+if (require.main === module) {
+  seedDatabase()
+    .then(() => process.exit(0))
+    .catch(() => process.exit(1));
+}
+
+module.exports = { seedDatabase };

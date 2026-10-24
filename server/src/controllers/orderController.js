@@ -88,8 +88,12 @@ async function createOrder(req, res, next) {
       const updatedProduct = await Product.findOneAndUpdate(
         {
           _id: product._id,
-          'variants._id': variant._id,
-          'variants.stock': { $gte: qty },
+          variants: {
+            $elemMatch: {
+              _id: variant._id,
+              stock: { $gte: qty },
+            },
+          },
         },
         {
           $inc: { 'variants.$.stock': -qty },

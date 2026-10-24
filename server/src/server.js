@@ -62,6 +62,10 @@ app.use(cookieParser(config.cookieSecret));
 // Serve local upload assets statically
 app.use('/uploads', express.static(path.resolve(__dirname, '../uploads')));
 
+// Serve production frontend build static assets
+const clientDistPath = path.resolve(__dirname, '../../client/dist');
+app.use(express.static(clientDistPath));
+
 // Database connection assurance for serverless environments
 app.use(async (req, res, next) => {
   try {
@@ -103,6 +107,19 @@ app.use('/api/coupons', couponRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/settings', settingsRoutes);
 
+// Client Single Page Application fallback for production Render deployment
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
+    return next();
+  }
+  const indexHtml = path.join(clientDistPath, 'index.html');
+  res.sendFile(indexHtml, (err) => {
+    if (err) {
+      next();
+    }
+  });
+});
+
 // 404 & Error Handling
 app.use(notFoundHandler);
 app.use(errorHandler);
@@ -113,8 +130,21 @@ async function startServer() {
     await connectDB();
     logEnvironmentSummary();
 
-    const server = app.listen(config.port, () => {
+    const server = app.listen(config.port, async () => {
       console.log(`[Jashvi Boutique Server] Running smoothly on http://localhost:${config.port}`);
+
+      // Auto-seed initial catalog if database is fresh (e.g. initial Render deployment)
+      try {
+        const Category = require('./models/Category');
+        const catCount = await Category.countDocuments();
+        if (catCount === 0) {
+          console.log('[Render Auto-Setup] Fresh database detected. Seeding initial boutique catalog & admin...');
+          const { seedDatabase } = require('./scripts/seed');
+          await seedDatabase();
+        }
+      } catch (seedErr) {
+        console.warn('[Auto-Seed Note]:', seedErr.message);
+      }
     });
 
     return server;

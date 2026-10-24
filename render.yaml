@@ -1,0 +1,38 @@
+# Render Blueprint Specification for Jashvi Boutique Full-Stack Platform
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: jashvi-boutique
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: https://jashvi-boutique.onrender.com
+      - key: STORAGE_MODE
+        value: local
+      - key: PAYMENT_MODE
+        value: mock
+      - key: BOUTIQUE_NAME
+        value: Jashvi Boutique
+      - key: BOUTIQUE_PHONE
+        value: "8050853393"
+      - key: BOUTIQUE_EMAIL
+        value: contact@jashviboutique.com
+      - key: BOUTIQUE_ADDRESS
+        value: "#G1, Ground Floor, Bloom Residency, Victor Bishop Road, Attavara, Mangalore, Karnataka 575001"

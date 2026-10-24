@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
+import HeroProductCarousel from '../components/HeroProductCarousel';
 import {
   ArrowRight,
   Sparkles,
@@ -53,91 +54,104 @@ export default function Home() {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="hero-section">
-        <div className="container hero-grid">
-          <div>
-            <div className="hero-tagline">
-              <Sparkles size={16} />
-              <span>Attavara, Mangalore • Est. Fashion Atelier</span>
-            </div>
+      {/* 3D Auto-Advancing Coverflow Showcase of Newly Available Products */}
+      <HeroProductCarousel products={allProducts} />
 
-            <h1 className="hero-title">
-              Graceful Ethnic Fashion, <br />
-              <span style={{ color: 'var(--accent-rose-dark)' }}>Tailored with Elegance.</span>
-            </h1>
-
-            <p className="hero-description">
-              Explore Jashvi Boutique's handcrafted collection of pure cotton kurtis, opulent festive lehengas, authentic Chanderi dress materials, and bespoke in-store tailoring.
-            </p>
-
-            <div className="hero-actions">
-              <Link to="/products" className="btn btn-primary btn-lg">
-                Shop Collection <ArrowRight size={18} />
-              </Link>
-              <Link to="/tailoring" className="btn btn-secondary btn-lg">
-                <Scissors size={18} color="#C98491" /> In-Store Tailoring
-              </Link>
-            </div>
-
-            {/* Reassurance highlights */}
+      {/* Boutique Value & Reassurance Highlights Strip */}
+      <div style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #EAE7E4', padding: '1.25rem 0' }}>
+        <div
+          className="container"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: '1.5rem',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'center' }}>
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '1rem',
-                marginTop: '2.5rem',
-                paddingTop: '2rem',
-                borderTop: '1px solid var(--border-soft)',
-                fontSize: '0.85rem',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(201, 132, 145, 0.12)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
               }}
             >
-              <div>
-                <p style={{ fontWeight: 700, color: 'var(--text-primary)' }}>100% Authentic</p>
-                <p style={{ fontSize: '0.8rem' }}>Curated Fabrics</p>
-              </div>
-              <div>
-                <p style={{ fontWeight: 700, color: 'var(--text-primary)' }}>Mangalore Express</p>
-                <p style={{ fontSize: '0.8rem' }}>Complimentary over ₹1,999</p>
-              </div>
-              <div>
-                <p style={{ fontWeight: 700, color: 'var(--text-primary)' }}>Custom Fitting</p>
-                <p style={{ fontSize: '0.8rem' }}>Attavara Atelier</p>
-              </div>
+              <ShieldCheck size={20} color="#A86472" />
+            </div>
+            <div>
+              <p style={{ fontWeight: 700, fontSize: '0.9rem', color: '#262322' }}>100% Authentic Fabrics</p>
+              <p style={{ fontSize: '0.78rem', color: '#8A817D' }}>Handcrafted pure cotton & Chanderi</p>
             </div>
           </div>
 
-          <div className="hero-image-wrap">
-            <img
-              src="/assets/images/purple-embroidered-kurti.jpg"
-              alt="Jashvi Boutique Regal Purple Kurti"
-            />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'center' }}>
             <div
               style={{
-                position: 'absolute',
-                bottom: '1.25rem',
-                left: '1.25rem',
-                right: '1.25rem',
-                backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                backdropFilter: 'blur(8px)',
-                padding: '1rem',
-                borderRadius: '8px',
-                border: '1px solid #EAE7E4',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(201, 132, 145, 0.12)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
               }}
             >
-              <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#C98491', fontWeight: 700 }}>
-                Featured Arrival
-              </span>
-              <p style={{ fontWeight: 600, fontSize: '0.95rem', color: '#262322', marginTop: '2px' }}>
-                Royal Purple Hand-Embroidered Kurta Set
-              </p>
-              <p style={{ fontSize: '0.85rem', color: '#5C5552' }}>
-                Pure Cotton Cambric with tailored cigarette pants
-              </p>
+              <Truck size={20} color="#A86472" />
+            </div>
+            <div>
+              <p style={{ fontWeight: 700, fontSize: '0.9rem', color: '#262322' }}>Express Mangalore Delivery</p>
+              <p style={{ fontSize: '0.78rem', color: '#8A817D' }}>Complimentary shipping over ₹1,999</p>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'center' }}>
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(201, 132, 145, 0.12)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <Scissors size={20} color="#A86472" />
+            </div>
+            <div>
+              <p style={{ fontWeight: 700, fontSize: '0.9rem', color: '#262322' }}>Bespoke Custom Fitting</p>
+              <p style={{ fontSize: '0.78rem', color: '#8A817D' }}>Attavara In-Store Atelier</p>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'center' }}>
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(201, 132, 145, 0.12)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <RotateCcw size={20} color="#A86472" />
+            </div>
+            <div>
+              <p style={{ fontWeight: 700, fontSize: '0.9rem', color: '#262322' }}>Hassle-Free Returns</p>
+              <p style={{ fontSize: '0.78rem', color: '#8A817D' }}>Easy size exchange policy</p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* 1. NEW BOUTIQUE ARRIVALS ON TOP WITH INTEGRATED CATEGORY TABS */}
       <section style={{ padding: '4.5rem 0', backgroundColor: '#F7F4F0', borderBottom: '1px solid #EAE7E4' }}>
@@ -245,57 +259,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. SHOP BY CATEGORY SECTION */}
-      <section style={{ padding: '4.5rem 0', backgroundColor: '#FFFFFF' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.12em', color: '#C98491', fontWeight: 700 }}>
-              Curated Wardrobe
-            </span>
-            <h2 style={{ fontSize: '2rem', marginTop: '0.25rem' }}>Shop by Category</h2>
-            <p style={{ maxWidth: '600px', margin: '0.5rem auto 0', color: '#5C5552' }}>
-              Handpicked fabrics and contemporary silhouettes crafted for daily comfort and festive celebrations.
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-              gap: '1.5rem',
-            }}
-          >
-            {categories.map((cat) => (
-              <Link
-                key={cat._id}
-                to={`/products?category=${cat.slug}`}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                  border: '1px solid #EAE7E4',
-                  backgroundColor: '#FDFBF9',
-                  transition: 'transform 0.25s ease, box-shadow 0.25s ease',
-                }}
-                className="card-hover"
-              >
-                <div style={{ height: '220px', overflow: 'hidden', backgroundColor: '#EAE7E4' }}>
-                  <img
-                    src={cat.image || '/assets/images/purple-embroidered-kurti.jpg'}
-                    alt={cat.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                </div>
-                <div style={{ padding: '1rem', textAlign: 'center' }}>
-                  <h3 style={{ fontSize: '1.15rem', marginBottom: '0.25rem' }}>{cat.name}</h3>
-                  <p style={{ fontSize: '0.8rem', color: '#8A817D' }}>{cat.description}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* In-Store Bespoke Tailoring Atelier Showcase */}
       <section style={{ padding: '4.5rem 0', backgroundColor: '#FFFFFF' }}>
@@ -457,8 +420,8 @@ export default function Home() {
               >
                 Chat on WhatsApp
               </a>
-              <Link to="/contact" className="btn btn-secondary" style={{ width: '100%' }}>
-                Store Contact & Directions
+              <Link to="/about#visit" className="btn btn-secondary" style={{ width: '100%' }}>
+                Store Address & Directions
               </Link>
             </div>
           </div>

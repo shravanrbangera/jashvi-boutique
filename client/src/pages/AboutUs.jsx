@@ -1,34 +1,186 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Sparkles, Scissors, ShieldCheck, MapPin, ArrowRight } from 'lucide-react';
+import {
+  Heart,
+  Sparkles,
+  Scissors,
+  ShieldCheck,
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  MessageCircle,
+  Navigation,
+} from 'lucide-react';
 
 export default function AboutUs() {
   return (
-    <div style={{ backgroundColor: '#FDFBF9', paddingBottom: '5rem' }}>
-      {/* Header */}
-      <section
-        style={{
-          background: 'linear-gradient(135deg, #FBF8F5 0%, #F5ECEE 100%)',
-          padding: '4.5rem 0',
-          textAlign: 'center',
-          borderBottom: '1px solid #EAE7E4',
-        }}
-      >
-        <div className="container" style={{ maxWidth: '780px' }}>
-          <span style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: '#C98491', fontWeight: 700 }}>
-            Our Heritage & Passion
-          </span>
-          <h1 style={{ fontSize: '2.8rem', marginTop: '0.5rem', marginBottom: '1.25rem', lineHeight: 1.2 }}>
-            About Jashvi Boutique
-          </h1>
-          <p style={{ color: '#5C5552', fontSize: '1.1rem', lineHeight: 1.7 }}>
-            Rooted in Attavara, Mangalore — celebrating timeless Indian grace, handcrafted textiles, and personalized bespoke tailoring.
-          </p>
+    <div style={{ backgroundColor: '#FDFBF9', paddingBottom: '3rem' }}>
+      {/* Top Section: Boutique Details & Atelier Contact Cards */}
+      <section id="visit" style={{ padding: '4rem 0 4rem', backgroundColor: '#FDFBF9' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
+            <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: '#C98491', fontWeight: 700 }}>
+              Visit & Connect
+            </span>
+            <h2 style={{ fontSize: '2.4rem', marginTop: '0.35rem', color: '#1A1716' }}>
+              Visit Our Boutique & Atelier
+            </h2>
+            <p style={{ maxWidth: '640px', margin: '0.5rem auto 0', color: '#5C5552', fontSize: '1rem', lineHeight: 1.6 }}>
+              Whether you are looking for ready-to-wear kurtis, bridal attire consultations, or personalized in-store tailoring, we warmly welcome you to our Attavara studio.
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '1.75rem',
+            }}
+          >
+            {/* Address Card */}
+            <div
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderRadius: '14px',
+                border: '1px solid #EAE7E4',
+                padding: '2rem 1.5rem',
+                boxShadow: '0 4px 15px rgba(38, 35, 34, 0.05)',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'rgba(201, 132, 145, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                <MapPin size={24} color="#A84A5D" />
+              </div>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: '#1A1716' }}>Boutique Address</h3>
+              <p style={{ color: '#5C5552', fontSize: '0.95rem', lineHeight: 1.65, flex: 1, marginBottom: '1.25rem' }}>
+                #G1, Ground Floor, Bloom Residency,<br />
+                Victor Bishop Road, Attavara,<br />
+                Mangalore, Karnataka 575001, India
+              </p>
+              <a
+                href="https://maps.google.com/?q=Bloom+Residency+Victor+Bishop+Road+Attavara+Mangalore"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-secondary btn-sm"
+                style={{ width: '100%', justifyContent: 'center', gap: '0.4rem', fontWeight: 600 }}
+              >
+                <Navigation size={15} color="#A84A5D" /> Open in Google Maps
+              </a>
+            </div>
+
+            {/* Timings Card */}
+            <div
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderRadius: '14px',
+                border: '1px solid #EAE7E4',
+                padding: '2rem 1.5rem',
+                boxShadow: '0 4px 15px rgba(38, 35, 34, 0.05)',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'rgba(201, 132, 145, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                <Clock size={24} color="#A84A5D" />
+              </div>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: '#1A1716' }}>Store & Atelier Timings</h3>
+              <div style={{ color: '#5C5552', fontSize: '0.95rem', lineHeight: 1.7, flex: 1, marginBottom: '1.25rem' }}>
+                <p>Monday – Saturday:</p>
+                <p style={{ fontWeight: 700, color: '#1A1716', fontSize: '1.05rem' }}>10:00 AM – 8:30 PM</p>
+                <p style={{ marginTop: '0.5rem' }}>Sunday:</p>
+                <p style={{ fontWeight: 700, color: '#D32F2F' }}>Closed (Family Day)</p>
+              </div>
+              <span style={{ fontSize: '0.82rem', color: '#8A817D', fontStyle: 'italic' }}>
+                * Walk-ins welcome for custom measurements & ready-to-wear shopping.
+              </span>
+            </div>
+
+            {/* Telephone & WhatsApp Card */}
+            <div
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderRadius: '14px',
+                border: '1px solid #EAE7E4',
+                padding: '2rem 1.5rem',
+                boxShadow: '0 4px 15px rgba(38, 35, 34, 0.05)',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'rgba(201, 132, 145, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                <Phone size={24} color="#A84A5D" />
+              </div>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: '#1A1716' }}>Call & WhatsApp</h3>
+              <p style={{ color: '#5C5552', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '0.5rem' }}>
+                Direct Boutique Line:
+              </p>
+              <a
+                href="tel:8050853393"
+                style={{ fontSize: '1.25rem', fontWeight: 800, color: '#1A1716', display: 'block', marginBottom: '1.25rem' }}
+              >
+                +91 8050853393
+              </a>
+              <a
+                href="https://wa.me/918050853393?text=Hello%20Jashvi%20Boutique"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-primary btn-sm"
+                style={{
+                  backgroundColor: '#25D366',
+                  borderColor: '#25D366',
+                  color: '#FFFFFF',
+                  width: '100%',
+                  justifyContent: 'center',
+                  fontWeight: 600,
+                  gap: '0.4rem',
+                }}
+              >
+                <MessageCircle size={16} /> Chat on WhatsApp
+              </a>
+            </div>
+
+            {/* Email & Inquiries Card */}
+            <div
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderRadius: '14px',
+                border: '1px solid #EAE7E4',
+                padding: '2rem 1.5rem',
+                boxShadow: '0 4px 15px rgba(38, 35, 34, 0.05)',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'rgba(201, 132, 145, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                <Mail size={24} color="#A84A5D" />
+              </div>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: '#1A1716' }}>Email Inquiries</h3>
+              <p style={{ color: '#5C5552', fontSize: '0.95rem', lineHeight: 1.6, flex: 1, marginBottom: '1.25rem' }}>
+                For bridal consultations, bulk orders, or order assistance:
+                <br />
+                <a
+                  href="mailto:contact@jashviboutique.com"
+                  style={{ color: '#A84A5D', fontWeight: 700, fontSize: '1rem', display: 'inline-block', marginTop: '0.4rem' }}
+                >
+                  contact@jashviboutique.com
+                </a>
+              </p>
+              <Link
+                to="/tailoring"
+                className="btn btn-secondary btn-sm"
+                style={{ width: '100%', justifyContent: 'center', fontWeight: 600, gap: '0.4rem' }}
+              >
+                <Scissors size={15} color="#A84A5D" /> View Tailoring Services
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Story Grid */}
-      <section style={{ padding: '4.5rem 0' }}>
+      {/* 3. Followed by: Our Story Grid */}
+      <section style={{ padding: '4.5rem 0', backgroundColor: '#FFFFFF', borderTop: '1px solid #EAE7E4' }}>
         <div className="container">
           <div
             style={{
@@ -102,8 +254,8 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section style={{ backgroundColor: '#FFFFFF', padding: '4rem 0', borderTop: '1px solid #EAE7E4' }}>
+      {/* 4. Followed by: The Jashvi Standard Values */}
+      <section style={{ backgroundColor: '#FDFBF9', padding: '4rem 0', borderTop: '1px solid #EAE7E4' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.12em', color: '#C98491', fontWeight: 700 }}>
@@ -113,7 +265,7 @@ export default function AboutUs() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2rem' }}>
-            <div style={{ textAlign: 'center', padding: '1.5rem', backgroundColor: '#FDFBF9', borderRadius: '10px', border: '1px solid #EAE7E4' }}>
+            <div style={{ textAlign: 'center', padding: '1.5rem', backgroundColor: '#FFFFFF', borderRadius: '10px', border: '1px solid #EAE7E4' }}>
               <ShieldCheck size={32} color="#C98491" style={{ margin: '0 auto 1rem' }} />
               <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>100% Quality Inspected</h3>
               <p style={{ color: '#5C5552', fontSize: '0.9rem', lineHeight: 1.6 }}>
@@ -121,7 +273,7 @@ export default function AboutUs() {
               </p>
             </div>
 
-            <div style={{ textAlign: 'center', padding: '1.5rem', backgroundColor: '#FDFBF9', borderRadius: '10px', border: '1px solid #EAE7E4' }}>
+            <div style={{ textAlign: 'center', padding: '1.5rem', backgroundColor: '#FFFFFF', borderRadius: '10px', border: '1px solid #EAE7E4' }}>
               <Scissors size={32} color="#C98491" style={{ margin: '0 auto 1rem' }} />
               <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Custom Alterations</h3>
               <p style={{ color: '#5C5552', fontSize: '0.9rem', lineHeight: 1.6 }}>
@@ -129,7 +281,7 @@ export default function AboutUs() {
               </p>
             </div>
 
-            <div style={{ textAlign: 'center', padding: '1.5rem', backgroundColor: '#FDFBF9', borderRadius: '10px', border: '1px solid #EAE7E4' }}>
+            <div style={{ textAlign: 'center', padding: '1.5rem', backgroundColor: '#FFFFFF', borderRadius: '10px', border: '1px solid #EAE7E4' }}>
               <Heart size={32} color="#C98491" style={{ margin: '0 auto 1rem' }} />
               <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Customer Care</h3>
               <p style={{ color: '#5C5552', fontSize: '0.9rem', lineHeight: 1.6 }}>

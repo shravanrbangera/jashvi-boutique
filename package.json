@@ -1,0 +1,24 @@
+{
+  "name": "jashvi-boutique-fullstack",
+  "version": "1.0.0",
+  "description": "Jashvi Boutique - Full-Stack E-commerce Platform",
+  "main": "server/src/server.js",
+  "scripts": {
+    "build": "npm install --prefix server && npm install --prefix client && npm run build --prefix client",
+    "start": "node server/src/server.js",
+    "seed": "npm run seed --prefix server",
+    "test": "npm test --prefix server"
+  },
+  "keywords": [
+    "jashvi-boutique",
+    "ecommerce",
+    "clothing",
+    "render",
+    "mern",
+    "express",
+    "react",
+    "vite"
+  ],
+  "author": "Jashvi Boutique",
+  "license": "ISC"
+}

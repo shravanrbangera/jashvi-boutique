@@ -111,14 +111,17 @@ async function runTestSuite() {
     assert(couponRes.status === 200 && couponRes.data.coupon.discount === 200, 'Coupon JASHVI10 calculates accurate 10% discount');
 
     // TEST 7: Order creation with server-side price recalculation & stock deduction
+    const targetProduct = productsRes.data.products.find((p) => p.variants && p.variants.some((v) => v.stock > 0)) || firstProduct;
+    const targetVariant = targetProduct.variants.find((v) => v.stock > 0) || targetProduct.variants[0];
+
     const orderPayload = {
       items: [
         {
-          productId: firstProduct._id,
-          variantSku: firstProduct.variants[0].sku,
-          name: firstProduct.name,
-          size: firstProduct.variants[0].size,
-          color: firstProduct.variants[0].color,
+          productId: targetProduct._id,
+          variantSku: targetVariant.sku,
+          name: targetProduct.name,
+          size: targetVariant.size,
+          color: targetVariant.color,
           quantity: 1,
         },
       ],
@@ -134,7 +137,7 @@ async function runTestSuite() {
       couponCode: 'JASHVI10',
     };
 
-    const initialStock = firstProduct.variants[0].stock;
+    const initialStock = targetVariant.stock;
     const orderRes = await runRequest('/api/orders', {
       method: 'POST',
       headers: { Authorization: `Bearer ${customerToken}` },
@@ -144,8 +147,8 @@ async function runTestSuite() {
     assert(Boolean(orderRes.data.order.orderNumber), `Order generated unique ID: ${orderRes.data.order.orderNumber}`);
 
     // Verify stock was reduced in DB
-    const refreshedProduct = await runRequest(`/api/products/${firstProduct._id}`);
-    const updatedVariant = refreshedProduct.data.product.variants.find((v) => v.sku === firstProduct.variants[0].sku);
+    const refreshedProduct = await runRequest(`/api/products/${targetProduct._id}`);
+    const updatedVariant = refreshedProduct.data.product.variants.find((v) => v.sku === targetVariant.sku);
     assert(updatedVariant.stock === initialStock - 1, 'Variant stock decremented atomically by 1 in database');
 
     // TEST 8: Online payment verification with Dev Mock Gateway

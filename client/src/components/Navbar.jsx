@@ -188,14 +188,6 @@ export default function Navbar() {
                 About
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/contact"
-                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-              >
-                Contact
-              </NavLink>
-            </li>
           </ul>
         </nav>
 
@@ -551,10 +543,7 @@ export default function Navbar() {
               <Scissors size={16} /> Bespoke Tailoring
             </NavLink>
             <NavLink to="/about" onClick={() => setMobileMenuOpen(false)} className="nav-link">
-              About Us
-            </NavLink>
-            <NavLink to="/contact" onClick={() => setMobileMenuOpen(false)} className="nav-link">
-              Contact Us
+              About
             </NavLink>
             <NavLink to="/track" onClick={() => setMobileMenuOpen(false)} className="nav-link">
               Track Order

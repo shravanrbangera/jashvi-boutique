@@ -23,7 +23,6 @@ import ReturnStatusPage from './pages/ReturnStatusPage';
 import TailoringPage from './pages/TailoringPage';
 import WishlistPage from './pages/WishlistPage';
 import AboutUs from './pages/AboutUs';
-import ContactUs from './pages/ContactUs';
 import Policies from './pages/Policies';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -100,7 +99,7 @@ export default function App() {
           <Route path="/tailoring" element={<TailoringPage />} />
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/contact" element={<Navigate to="/about" replace />} />
           <Route path="/policies" element={<Policies />} />
           <Route path="/policies/:policy" element={<Policies />} />
           <Route path="/login" element={<Login />} />

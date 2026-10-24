@@ -133,6 +133,20 @@ Open `http://localhost:5173` in your browser.
 
 ---
 
+## 🚀 Production Deployment on Render
+
+The application is structured for 1-click or automated deployment on **Render** using the unified web service configuration defined in [`render.yaml`](render.yaml):
+- **Build Command**: `npm run build`
+- **Start Command**: `npm start`
+- **Blueprint Spec**: [`render.yaml`](render.yaml)
+
+Refer to the complete walkthrough:
+👉 **[Render Deployment Guide](docs/RENDER_DEPLOYMENT.md)**
+
+---
+
 ## 📚 Documentation
+- [Render Deployment Guide](docs/RENDER_DEPLOYMENT.md)
 - [Setup & Operational Guide](docs/SETUP_GUIDE.md)
 - [REST API Reference](docs/API_DOCUMENTATION.md)
+
