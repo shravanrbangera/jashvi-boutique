@@ -21,7 +21,20 @@ export default function ProductCard({ product }) {
     <div className="product-card">
       <div className="product-image-container">
         <Link to={`/products/${product._id}`}>
-          <img src={mainImage} alt={product.name} loading="lazy" />
+          <img
+            src={mainImage}
+            alt={product.name}
+            loading="lazy"
+            onError={(e) => {
+              e.target.onerror = null;
+              const filename = mainImage ? mainImage.split('/').pop() : '';
+              if (filename && !e.target.src.includes('/assets/images/')) {
+                e.target.src = `/assets/images/${filename}`;
+              } else {
+                e.target.src = '/assets/images/purple-embroidered-kurti.jpg';
+              }
+            }}
+          />
         </Link>
 
         {/* Wishlist Button */}

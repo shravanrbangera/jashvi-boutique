@@ -172,9 +172,19 @@ export default function ProductDetails() {
               }}
             >
               <img
-                src={selectedImage || product.images[0]}
+                src={selectedImage || product.images?.[0] || '/assets/images/purple-embroidered-kurti.jpg'}
                 alt={product.name}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  const currentSrc = selectedImage || product.images?.[0] || '';
+                  const filename = currentSrc.split('/').pop();
+                  if (filename && !e.target.src.includes('/assets/images/')) {
+                    e.target.src = `/assets/images/${filename}`;
+                  } else {
+                    e.target.src = '/assets/images/purple-embroidered-kurti.jpg';
+                  }
+                }}
               />
 
               {hasSale && (
@@ -204,7 +214,20 @@ export default function ProductDetails() {
                       cursor: 'pointer',
                     }}
                   >
-                    <img src={img} alt={`View ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img
+                      src={img}
+                      alt={`View ${idx + 1}`}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        const filename = img ? img.split('/').pop() : '';
+                        if (filename && !e.target.src.includes('/assets/images/')) {
+                          e.target.src = `/assets/images/${filename}`;
+                        } else {
+                          e.target.src = '/assets/images/purple-embroidered-kurti.jpg';
+                        }
+                      }}
+                    />
                   </button>
                 ))}
               </div>

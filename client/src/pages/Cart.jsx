@@ -153,6 +153,16 @@ export default function Cart() {
                     src={item.product?.image || '/assets/images/purple-embroidered-kurti.jpg'}
                     alt={item.product?.name}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      const currentSrc = item.product?.image || '';
+                      const filename = currentSrc.split('/').pop();
+                      if (filename && !e.target.src.includes('/assets/images/')) {
+                        e.target.src = `/assets/images/${filename}`;
+                      } else {
+                        e.target.src = '/assets/images/purple-embroidered-kurti.jpg';
+                      }
+                    }}
                   />
                 </div>
 

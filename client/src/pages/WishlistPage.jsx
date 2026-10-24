@@ -127,7 +127,20 @@ export default function WishlistPage() {
                 >
                   <div style={{ position: 'relative', aspectRatio: '3/4', backgroundColor: '#EAE7E4' }}>
                     <Link to={`/products/${product._id}`}>
-                      <img src={mainImage} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img
+                        src={mainImage}
+                        alt={product.name}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          const filename = mainImage ? mainImage.split('/').pop() : '';
+                          if (filename && !e.target.src.includes('/assets/images/')) {
+                            e.target.src = `/assets/images/${filename}`;
+                          } else {
+                            e.target.src = '/assets/images/purple-embroidered-kurti.jpg';
+                          }
+                        }}
+                      />
                     </Link>
                     <button
                       onClick={() => toggleWishlist(product._id)}
